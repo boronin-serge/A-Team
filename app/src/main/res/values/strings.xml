@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">A-Teams</string>
+
+    <!--Ip card-->
+    <string name="ip_card_label">IP</string>
+    <string name="no_ip_label">Unknown</string>
+
+    <!--Date card-->
+    <string name="date_card_label">Current date and time</string>
+    <string name="no_date_label">Unknown</string>
+
+    <!--Echo card-->
+    <string name="echo_card_label">Echo request</string>
+    <string name="echo_answer_label">Answer</string>
+    <string name="no_echo_label">Unknown</string>
+</resources>
