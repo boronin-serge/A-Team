@@ -1,101 +1,170 @@
 package com.boronin.a_teams;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.boronin.a_teams.models.Date;
-import com.boronin.a_teams.models.Echo;
-import com.boronin.a_teams.models.Ip;
-import com.boronin.a_teams.models.JsonObj;
+import com.boronin.a_teams.cards.CommentCard;
+import com.boronin.a_teams.cards.PostCard;
+import com.boronin.a_teams.cards.TodoCard;
+import com.boronin.a_teams.cards.UsersCard;
+import com.boronin.a_teams.models.Comments;
+import com.boronin.a_teams.models.Posts;
+import com.boronin.a_teams.models.Todo;
+import com.boronin.a_teams.models.Users;
+import com.boronin.a_teams.utilities.Constants;
 import com.boronin.a_teams.utilities.NetworkUtils;
-import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView ipTextView;
-    TextView dateTextView;
-    TextView echoTextView;
+    ProgressBar usersProgressBar;
+    ProgressBar todoProgressBar;
 
-    EditText editEcho;
+    TextView postNumberError;
+    TextView commentNumberError;
 
-    Button sendEchoButton;
+    EditText editPostNumber;
+    EditText editCommentNumber;
+
+    Button getPostButton;
+    Button getCommentButton;
+    ImageView usersUpdateButton;
+    ImageView todoUpdateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ipTextView = (TextView) findViewById(R.id.tv_ip);
-        dateTextView = (TextView) findViewById(R.id.tv_date);
-        echoTextView = (TextView) findViewById(R.id.tv_echo);
+        initPostCard();
+        initCommentCard();
+        initUsers();
+        initTodos();
 
-        editEcho = (EditText) findViewById(R.id.et_echo);
-
-        sendEchoButton = (Button) findViewById(R.id.sendEchoRequest);
-
-        makeRequests();
     }
 
-    private void makeRequests() {
-        URL ipUrl = NetworkUtils.buildIpUrl();
-        URL dateUrl = NetworkUtils.buildDateUrl();
+    private void initCommentCard() {
+        commentNumberError = (TextView) findViewById(R.id.comments_number_error);
+        getCommentButton = (Button) findViewById(R.id.getCommentButton);
 
-        Ip   ipPOJO = new Ip();
-        Date datePOJO = new Date();
+        editCommentNumber = (EditText) findViewById(R.id.edit_comment_number);
+        editCommentNumber.addTextChangedListener(new TextWatcher(){
+            public void afterTextChanged(Editable s) {}
 
-        new InternetRequestTask(ipTextView, ipPOJO).execute(ipUrl);
-        new InternetRequestTask(dateTextView, datePOJO).execute(dateUrl);
-    }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 
-    public void sendEcho(View view) {
-        String requestData = editEcho.getText().toString();
-        URL echoUrl = NetworkUtils.buildEchoUrl(requestData);
-        Echo echoPOJO = new Echo();
-        new InternetRequestTask(echoTextView, echoPOJO).execute(echoUrl);
-    }
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+                String strEnteredVal = editCommentNumber.getText().toString();
 
+                if(!strEnteredVal.equals("")){
+                    int n=Integer.parseInt(strEnteredVal);
+                    if(n > Constants.COMMENT_LIMIT){
+                        getCommentButton.setEnabled(false);
+                        commentNumberError.setVisibility(View.VISIBLE);
+                        editCommentNumber.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorError));
+                    }else{
+                        getCommentButton.setEnabled(true);
+                        commentNumberError.setVisibility(View.INVISIBLE);
+                        editCommentNumber.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+                    }
+                }
 
-    public class InternetRequestTask extends AsyncTask<URL, Void, String> {
-        TextView tv;
-        JsonObj jsonObj;
-
-        public InternetRequestTask(TextView tv, JsonObj jsonObj) {
-            this.tv = tv;
-            this.jsonObj = jsonObj;
-        }
-
-        @Override
-        protected String doInBackground(URL... urls) {
-            URL requestUrl = urls[0];
-            String result = null;
-            try {
-                result = NetworkUtils.getResponseFromHttpUrl(requestUrl);
-                Log.d("request result", result);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            return result;
-        }
+        });
+    }
 
-        @Override
-        protected void onPostExecute(String requestResult) {
-            super.onPostExecute(requestResult);
+    public void initPostCard() {
+        postNumberError = (TextView) findViewById(R.id.post_number_error);
+        getPostButton = (Button) findViewById(R.id.getPostButton);
 
-            if (!requestResult.equals("") && tv != null) {
-                Gson gson = new Gson();
-                jsonObj = gson.fromJson(requestResult, jsonObj.getClass());
-                tv.setText(jsonObj.composeString());
+        editPostNumber = (EditText) findViewById(R.id.edit_post_number);
+        editPostNumber.addTextChangedListener(new TextWatcher(){
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+                String strEnteredVal = editPostNumber.getText().toString();
+
+                if(!strEnteredVal.equals("")){
+                    int n=Integer.parseInt(strEnteredVal);
+                    if(n > Constants.POST_LIMIT){
+                        getPostButton.setEnabled(false);
+                        postNumberError.setVisibility(View.VISIBLE);
+                        editPostNumber.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorError));
+                    }else{
+                        getPostButton.setEnabled(true);
+                        postNumberError.setVisibility(View.INVISIBLE);
+                        editPostNumber.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+                    }
+                }
+
             }
+        });
+    }
+
+    private void initUsers() {
+        usersProgressBar = (ProgressBar) findViewById(R.id.usersProgressBar);
+        usersUpdateButton = (ImageView) findViewById(R.id.usersUpdateButton);
+    }
+
+    private void initTodos() {
+        todoProgressBar = (ProgressBar) findViewById(R.id.todoProgressBar);
+        todoUpdateButton = (ImageView) findViewById(R.id.todoUpdateButton);
+    }
+
+    // Handlers for buttons
+
+    public void onPostButtonClicked(View view) {
+        String postNumber = editPostNumber.getText().toString();
+        URL postUrl = NetworkUtils.buildPostsUrl(postNumber);
+        PostCard post = new PostCard((CardView) findViewById(R.id.post_card));
+        post.model = new Posts();
+        new InternetRequestTask(post).execute(postUrl);
+    }
+
+    public void onCommentButtonClicked(View view) {
+        String commentNumber = editCommentNumber.getText().toString();
+        URL commentUrl = NetworkUtils.buildCommentsUrl(commentNumber);
+        CommentCard comment = new CommentCard((CardView) findViewById(R.id.comment_card));
+        comment.model = new Comments();
+        new InternetRequestTask(comment).execute(commentUrl);
+    }
+
+    public void onUpdateUsers(View view) {
+        usersUpdateButton.setVisibility(View.INVISIBLE);
+        usersProgressBar.setVisibility(View.VISIBLE);
+        URL userUrl;
+        UsersCard users = new UsersCard((CardView) findViewById(R.id.users_card), Constants.USERS_LIMIT);
+        users.model = new Users();
+
+        for (int i = 0; i < Constants.USERS_LIMIT; i++) {
+            userUrl = NetworkUtils.buildUsersUrl(String.valueOf(i + 1));
+            new InternetRequestTask(users).execute(userUrl);
         }
     }
+
+    public void onUpdateTodo(View view) {
+        todoUpdateButton.setVisibility(View.INVISIBLE);
+        todoProgressBar.setVisibility(View.VISIBLE);
+        int radomNumber = (int) (Math.random() * Constants.TODO_LIMIT);
+        Log.d("random index for todo", String.valueOf(radomNumber));
+        URL todoUrl = NetworkUtils.buildTodosUrl(String.valueOf(radomNumber));
+        TodoCard todos = new TodoCard((CardView) findViewById(R.id.todo_card));
+        todos.model = new Todo();
+        new InternetRequestTask(todos).execute(todoUrl);
+    }
+
 }

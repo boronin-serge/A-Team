@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.boronin.a_teams.MainActivity">
 
-    <include
-        android:id="@+id/ip_card"
-        layout="@layout/ip_card" />
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.boronin.a_teams.MainActivity">
 
-    <include
-        android:id="@+id/date_card"
-        layout="@layout/date_card" />
+        <include
+            layout="@layout/posts_card" />
 
-    <include layout="@layout/echo_card"
-        android:id="@+id/echo_card"/>
+        <include
+            layout="@layout/comments_card" />
 
+        <include
+            layout="@layout/users_card" />
 
-</LinearLayout>
+        <include
+            layout="@layout/todo_card" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,6 +1,7 @@
 package com.boronin.a_teams.utilities;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,16 +16,16 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
-    final static String PREFIX = "https://";
-    final static String BASE_URL = "httpbin.org";
+    final static String BASE_URL    = "https://jsonplaceholder.typicode.com";
 
-    final static String IP_QUERY = "/ip";
-    final static String CURRENT_TIME = "now.";  // To paste before BASE_URL
-    final static String ECHO = "/anything";
+    final static String POSTS       = "/posts/";
+    final static String COMMENTS    = "/comments/";
+    final static String USERS       = "/users/";
+    final static String PHOTOS      = "/photos/";
+    final static String TODOS       = "/todos/";
 
     public static URL buildUrl(String URL) {
-        Uri builtUri = Uri.parse(URL).buildUpon()
-                .build();
+        Uri builtUri = Uri.parse(URL);
 
         URL url = null;
         try {
@@ -36,28 +37,24 @@ public class NetworkUtils {
         return url;
     }
 
-    public static URL buildIpUrl() {
-        return buildUrl(PREFIX + BASE_URL + IP_QUERY);
+    public static URL buildPostsUrl(String n) {
+        return buildUrl(BASE_URL + POSTS + n);
     }
 
-    public static URL buildDateUrl() {
-        return buildUrl(PREFIX + CURRENT_TIME + BASE_URL);
+    public static URL buildCommentsUrl(String n) {
+        return buildUrl(BASE_URL + COMMENTS + n);
     }
 
-    public static URL buildEchoUrl(String data) {
-        Uri builtUri = Uri.parse(PREFIX + BASE_URL + ECHO)
-                .buildUpon()
-                .appendQueryParameter("data", data)
-                .build();
+    public static URL buildUsersUrl(String n) {
+        return buildUrl(BASE_URL + USERS + n);
+    }
 
-        URL url = null;
-        try {
-            url = new URL(builtUri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    public static URL buildPhotosUrl(String n) {
+        return buildUrl(BASE_URL + PHOTOS + n);
+    }
 
-        return url;
+    public static URL buildTodosUrl(String n) {
+        return buildUrl(BASE_URL + TODOS + n);
     }
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
