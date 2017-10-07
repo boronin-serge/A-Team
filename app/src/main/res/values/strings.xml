@@ -18,8 +18,12 @@
     <string name="users_label">Users data: </string>
 
     <!--Photos card-->
-    <string name="photos_card_label">Photos</string>
+    <string name="photo_card_label">Photos</string>
 
     <!--Todos card-->
     <string name="todos_card_label">Todos</string>
+
+    <!--Tab labels-->
+    <string name="cards_tab_label">Cards</string>
+    <string name="contacts_tab_label">Contacts</string>
 </resources>

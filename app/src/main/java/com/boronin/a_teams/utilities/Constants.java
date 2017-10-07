@@ -11,4 +11,5 @@ public class Constants {
     public static final Integer COMMENT_LIMIT = 500;
     public static final Integer USERS_LIMIT = 5;
     public static final Integer TODO_LIMIT = 200;
+    public static final Integer PHOTO_NUMBER = 3;
 }

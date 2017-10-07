@@ -16,22 +16,19 @@ import com.boronin.a_teams.models.Users;
 
 public class UsersCard extends Card {
     private String response;
-    private CardView usersView;
     private TextView userContent;
     private ProgressBar progressBar;
     private ImageView updateButton;
     private int count;
 
     public UsersCard(CardView cardView, Integer count) {
-        this.usersView = cardView;
+        this.cardView = cardView;
         this.userContent = cardView.findViewById(R.id.user_content);
         this.count = count;
         response = new String("");
         progressBar = cardView.findViewById(R.id.usersProgressBar);
         updateButton = cardView.findViewById(R.id.usersUpdateButton);
         model = new Users();
-
-        userContent.setText(R.string.no_data_label);
     }
 
     public void publishResult() {

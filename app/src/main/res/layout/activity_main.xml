@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.boronin.a_teams.MainActivity">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include
-            layout="@layout/posts_card" />
+    </android.support.v4.view.ViewPager>
 
-        <include
-            layout="@layout/comments_card" />
-
-        <include
-            layout="@layout/users_card" />
-
-        <include
-            layout="@layout/todo_card" />
-
-    </LinearLayout>
-</ScrollView>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorWhite"
+        app:tabIndicatorHeight="6dp"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/colorWhite"/>
+</FrameLayout>

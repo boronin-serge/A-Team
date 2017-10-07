@@ -9,7 +9,9 @@
     android:layout_marginRight="5dp"
     android:layout_marginTop="5dp"
     app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
-                android:onClick="onPostButtonClicked"
                 android:text="Submit"
                 android:enabled="false"/>
         </LinearLayout>

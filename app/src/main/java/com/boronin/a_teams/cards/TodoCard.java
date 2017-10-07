@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.boronin.a_teams.R;
+import com.boronin.a_teams.models.Todo;
 
 /**
  * Created by boronin on 06.10.17.
@@ -21,6 +22,7 @@ public class TodoCard extends Card {
         this.todoContent = cardView.findViewById(R.id.todos);
         progressBar = cardView.findViewById(R.id.todoProgressBar);
         updateButton = cardView.findViewById(R.id.todoUpdateButton);
+        model = new Todo();
     }
 
     @Override

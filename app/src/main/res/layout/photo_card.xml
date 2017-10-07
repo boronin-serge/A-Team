@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-    android:id="@+id/users_card"
+    android:id="@+id/photo_card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginTop="5dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10pt"
+        android:text="@string/photo_card_label"
+        android:textColor="@color/colorBlack"
+        android:padding="16dp"/>
+
+
     <ProgressBar
-        android:id="@+id/usersProgressBar"
+        android:id="@+id/photoProgressBar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="right"
@@ -21,36 +36,12 @@
         android:visibility="invisible"/>
 
     <ImageView
-        android:id="@+id/usersUpdateButton"
+        android:id="@+id/photoUpdateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:src="@mipmap/ic_refresh_black_24dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10pt"
-            android:text="@string/users_card_label"
-            android:textColor="@color/colorBlack"
-            android:paddingBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/user_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="@string/no_data_label"/>
-
-
-    </LinearLayout>
 
 </android.support.v7.widget.CardView>
