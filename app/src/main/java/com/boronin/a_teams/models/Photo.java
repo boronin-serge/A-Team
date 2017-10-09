@@ -1,6 +1,5 @@
 package com.boronin.a_teams.models;
 
-import com.boronin.a_teams.models.Model;
 import com.google.gson.annotations.SerializedName;
 
 /**

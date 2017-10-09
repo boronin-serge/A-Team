@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">A-Teams</string>
 
-    <string name="no_data_label">Unknown</string>
+    <string name="no_data_label">No data</string>
 
     <!--Posts card-->
     <string name="posts_card_label">Posts</string>
     <string name="posts_answer_label">Answer</string>
-    <string name="posts_card_content">Show post №</string>
+    <string name="posts_card_content">№</string>
 
     <!--Comments card-->
     <string name="comments_card_label">Comments</string>
     <string name="comments_answer_label">Answer</string>
-    <string name="comments_card_content">Show comment №</string>
+    <string name="comments_card_content">№</string>
 
     <!--Users card-->
     <string name="users_card_label">Users</string>

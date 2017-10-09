@@ -40,6 +40,8 @@ public class CardsFragment extends AbstractTabFragment{
     PostCard postCard;
     CommentCard commentCard;
 
+    ProgressBar postsProgressBar;
+    ProgressBar commentsProgressBar;
     ProgressBar usersProgressBar;
     ProgressBar photoProgressBar;
     ProgressBar todoProgressBar;
@@ -84,6 +86,7 @@ public class CardsFragment extends AbstractTabFragment{
     public void initPostCard() {
         postCard = new PostCard((CardView) view.findViewById(R.id.post_card));
 
+        postsProgressBar = view.findViewById(R.id.postProgressBar);
         postNumberError = view.findViewById(R.id.post_number_error);
         getPostButton = view.findViewById(R.id.getPostButton);
         getPostButton.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +104,7 @@ public class CardsFragment extends AbstractTabFragment{
 
             public void onTextChanged(CharSequence s, int start, int before, int count){
                 String strEnteredVal = editPostNumber.getText().toString();
+                postCard.setContentText(getResources().getString(R.string.no_data_label));
 
                 if(!strEnteredVal.equals("")){
                     int n=Integer.parseInt(strEnteredVal);
@@ -114,6 +118,10 @@ public class CardsFragment extends AbstractTabFragment{
                         editPostNumber.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBlack));
                     }
                 }
+                else {
+                    getPostButton.setEnabled(false);
+                    postNumberError.setVisibility(View.VISIBLE);
+                }
 
             }
         });
@@ -122,6 +130,7 @@ public class CardsFragment extends AbstractTabFragment{
     private void initCommentCard() {
         commentCard = new CommentCard((CardView) view.findViewById(R.id.comment_card));
 
+        commentsProgressBar = view.findViewById(R.id.commentsProgressBar);
         commentNumberError = view.findViewById(R.id.comments_number_error);
         getCommentButton = view.findViewById(R.id.getCommentButton);
         getCommentButton.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +148,7 @@ public class CardsFragment extends AbstractTabFragment{
 
             public void onTextChanged(CharSequence s, int start, int before, int count){
                 String strEnteredVal = editCommentNumber.getText().toString();
+                commentCard.setContentText(getResources().getString(R.string.no_data_label));
 
                 if(!strEnteredVal.equals("")){
                     int n=Integer.parseInt(strEnteredVal);
@@ -151,6 +161,10 @@ public class CardsFragment extends AbstractTabFragment{
                         commentNumberError.setVisibility(View.INVISIBLE);
                         editCommentNumber.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorBlack));
                     }
+                }
+                else {
+                    getCommentButton.setEnabled(false);
+                    commentNumberError.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -196,11 +210,17 @@ public class CardsFragment extends AbstractTabFragment{
     // Handlers for buttons
 
     public void onPostButtonClicked() {
+        editPostNumber.setFocusable(false);
+        editPostNumber.setFocusableInTouchMode(true);
+        postsProgressBar.setVisibility(View.VISIBLE);
         hideKeyboard(editPostNumber);
         postRequest();
     }
 
     public void onCommentButtonClicked() {
+        editPostNumber.setFocusable(false);
+        editPostNumber.setFocusableInTouchMode(true);
+        commentsProgressBar.setVisibility(View.VISIBLE);
         hideKeyboard(editCommentNumber);
         commentsRequest();
     }

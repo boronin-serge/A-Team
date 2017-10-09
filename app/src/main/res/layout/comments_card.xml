@@ -5,11 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="5dp"
     app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    app:cardBackgroundColor="@color/cardColor">
+
+    <ProgressBar
+        android:id="@+id/commentsProgressBar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="18dp"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,35 +35,27 @@
             android:paddingBottom="5dp"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="@string/comments_card_content"
-                android:textSize="14sp" />
-
+            android:orientation="horizontal">
             <EditText
                 android:id="@+id/edit_comment_number"
-                android:layout_width="45dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:inputType="number"
                 android:maxLength="3"
+                android:hint="@string/comments_card_content"
                 android:focusedByDefault="false"/>
-
             <Button
                 android:id="@+id/getCommentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:text="Submit"
-                android:enabled="false" />
+                android:enabled="false"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorWhite"/>
         </LinearLayout>
 
         <TextView
@@ -63,19 +64,12 @@
             android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
+            android:layout_marginRight="95dp"
             android:textColor="@color/colorError"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8pt"
-            android:text="@string/posts_answer_label"
-            android:textColor="@color/colorBlack"
-            android:paddingBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/comment"
+            android:id="@+id/comment_response"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_data_label"/>
