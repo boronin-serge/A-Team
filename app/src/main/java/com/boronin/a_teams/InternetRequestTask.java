@@ -36,7 +36,6 @@ public class InternetRequestTask extends AsyncTask<URL, Void, String> {
     @Override
     protected void onPostExecute(String requestResult) {
         super.onPostExecute(requestResult);
-
         if (requestResult != null) {
             Gson gson = new Gson();
             card.model = gson.fromJson(requestResult, card.model.getClass());

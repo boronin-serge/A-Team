@@ -20,7 +20,7 @@ import java.net.URL;
  */
 
 public class PhotoCard extends Card {
-    ImageView photoContent;
+    private ImageView photoContent;
     private ProgressBar progressBar;
     private ImageView updateButton;
 

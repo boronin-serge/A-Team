@@ -71,6 +71,4 @@ public class Users extends Model {
                 "userName: "    + userName  + "\n" +
                 "email: "       + email     + "\n\n";
     }
-
-
 }

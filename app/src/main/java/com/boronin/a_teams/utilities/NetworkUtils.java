@@ -26,14 +26,12 @@ public class NetworkUtils {
 
     public static URL buildUrl(String URL) {
         Uri builtUri = Uri.parse(URL);
-
         URL url = null;
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         return url;
     }
 
@@ -63,9 +61,8 @@ public class NetworkUtils {
             InputStream in = urlConnection.getInputStream();
 
             Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
-
             boolean hasInput = scanner.hasNext();
+
             if (hasInput) {
                 return scanner.next();
             } else {
